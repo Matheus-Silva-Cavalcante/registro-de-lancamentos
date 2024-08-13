@@ -62,9 +62,11 @@ function montarLancamento(lancamento, index) {
 
 
 lancamentos.forEach((lancamento, index) => {
+    if(!lancamento) return
+    console.log(lancamento)
+
     sectionLacamentos.prepend(montarLancamento(lancamento, index));
 });
-
 
 function buscarLancamento(buscarLacamento) {
     //debugger
@@ -85,7 +87,6 @@ btnBuscarLancamento.addEventListener('click', () => {
     buscarLancamento(campoBusca.value);
 })
 
-
 function eventoContainerLancamento(element){     
     let botoesControle = element.parentElement.getElementsByClassName('lancamento-conteudo__bnt')[0];
     
@@ -94,7 +95,7 @@ function eventoContainerLancamento(element){
 
     if(lancamentoSelecionado){
         element.classList.remove('lancamento-ativo');
-        botoesControle.style.display = 'none'
+        botoesControle.style.display = 'none';
 
     } else {
         if (lancamentoAtivo.length) {
@@ -104,17 +105,37 @@ function eventoContainerLancamento(element){
             });
 
             element.classList.add('lancamento-ativo');
-            botoesControle.style.display = ''
+            botoesControle.style.display = '';
 
         } else {
             element.classList.add('lancamento-ativo');
-            botoesControle.style.display = ''
+            botoesControle.style.display = '';
         };    
-    }
+    };
 }
 
 function eventoExcluirLancamento(elemento){
-    console.log(elemento.getAttribute('data-index'));
-    elemento.getAttribute('data-index')
+    //console.log(elemento.getAttribute('data-index'));
+    //elemento.getAttribute('data-index');
 
-}
+    const lancamentoSelecionado = '.lancamento-ativo';
+    
+    document.querySelectorAll(lancamentoSelecionado).forEach(excluirLancamento => {
+        //let botoesControle = document.querySelector('.lancamento-conteudo__bnt');       
+
+        let botoesControle = excluirLancamento.parentElement.getElementsByClassName('lancamento-conteudo__bnt')[0];
+
+        const indiceLancamento = excluirLancamento.getAttribute('data-index');
+
+        let confirmaRemocao = confirm('Deseja excluir esse Laçamento ?')
+
+        if (confirmaRemocao) {            
+            //delete lancamentos[indiceLancamento];
+    
+            //salvarLacamento();
+            excluirLancamento.remove();
+            botoesControle.style.display = 'none';
+        }
+    });
+
+};

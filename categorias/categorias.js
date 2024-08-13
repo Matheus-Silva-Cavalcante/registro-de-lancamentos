@@ -1,4 +1,4 @@
-const areaConteudoCategoria = document.querySelector('.area-conteudo')
+const areaConteudoCategoria = document.querySelector('.area-conteudo');
 
 // function exibiCategorias(categoria) {
 //     const divCategorias = document.createElement('div');
@@ -26,43 +26,63 @@ const areaConteudoCategoria = document.querySelector('.area-conteudo')
 //     return divCategorias;
 // };
 
-function exibiCategorias(categoria) {
+function exibiCategorias(categoria, index) {
     //debugger
     console.log(categoria)
     let opacity = 80; // hex
-    const divAreaCategorias = document.createElement('div');
-    divAreaCategorias.classList.add('area-conteudo__categoria');
-    
-    const divCategoria = document.createElement('div');
-    divCategoria.classList.add('categoria');
-    divCategoria.style.background = (categoria.cor + opacity);
-    divCategoria.style.color = categoria.corFonte;
-    
-    divCategoria.innerHTML = `
-        ${categoria.categoria}                
-    `    
-    
-    const divCategoriaCor = document.createElement('div');
-    divCategoriaCor.classList.add('categoria__color');
 
-    divCategoria.append(divCategoriaCor);
-    
-    divCategoriaCor.style.background = categoria.cor;
-    divCategoriaCor.style.color = categoria.corFonte;    
-    
-    const divContainerButton = document.createElement('div');
-    divContainerButton.classList.add('categoria-editar__excluir');
-    divContainerButton.style.display = 'none';
-    
-    divContainerButton.innerHTML = `
-        <button class="categoria-editar btn-editar__excluir">
+    let htmlCategoria = `
+    <div class="categoria" style="background-color: ${categoria.cor + opacity}; color: ${categoria.corFonte};" data-index="${index}" onclick="eventoContainerCategoria(this)">
+        ${categoria.categoria}
+        
+        <div class="categoria__color" style="background-color: ${categoria.cor};"></div>
+    </div>
+
+    <div class="categoria-editar__excluir" style="display: none;">
+        <button class="categoria-editar btn-editar__excluir" data-index="${index}" onclick="eventoEditarCategoria()">
             <div class="icon-editor"></div>
         </button>
-        
-        <button id="btnExcluirCategoria" class="categoria-excluir btn-editar__excluir">
+
+        <button class="categoria-excluir btn-editar__excluir" data-index="${index}" onclick="eventoExcluirCategoria()">
             <div class="icon-white"></div>
         </button>
-    `;
+    </div>
+    `
+
+    // const divAreaCategorias = document.createElement('div');
+    // divAreaCategorias.setAttribute('data-index', index)
+    // divAreaCategorias.classList.add('area-conteudo__categoria');
+    
+    // const divCategoria = document.createElement('div');
+    // divCategoria.classList.add('categoria');
+    // divCategoria.style.background = (categoria.cor + opacity);
+    // divCategoria.style.color = categoria.corFonte;
+    
+    // divCategoria.innerHTML = `
+    //     ${categoria.categoria}                
+    // `    
+    
+    // const divCategoriaCor = document.createElement('div');
+    // divCategoriaCor.classList.add('categoria__color');
+
+    // divCategoria.append(divCategoriaCor);
+    
+    // divCategoriaCor.style.background = categoria.cor;
+    // divCategoriaCor.style.color = categoria.corFonte;    
+    
+    // const divContainerButton = document.createElement('div');
+    // divContainerButton.classList.add('categoria-editar__excluir');
+    // divContainerButton.style.display = 'none';
+    
+    // divContainerButton.innerHTML = `
+    //     <button class="categoria-editar btn-editar__excluir">
+    //         <div class="icon-editor"></div>
+    //     </button>
+        
+    //     <button id="btnExcluirCategoria" class="categoria-excluir btn-editar__excluir" onclick="eventoExcluirCategoria(this)">
+    //         <div class="icon-white"></div>
+    //     </button>
+    // `;
 
     // divAreaCategorias.innerHTML =`
     //     <div class="categoria-editar__excluir" style="display: none;">
@@ -76,53 +96,140 @@ function exibiCategorias(categoria) {
     //     </div>
     // `;
 
-    divAreaCategorias.prepend(divCategoria);
-    divAreaCategorias.append(divContainerButton);
+    // divAreaCategorias.prepend(divCategoria);
+    // divAreaCategorias.append(divContainerButton);
 
-    divCategoria.onclick = () => {
-        const contemClass = divCategoria.classList.contains('categoria-ativo');
-        const categoriaAtiva = document.querySelectorAll('.categoria-ativo');
+    // divCategoria.onclick = () => {
+    //     const contemClass = divCategoria.classList.contains('categoria-ativo');
+    //     const categoriaAtiva = document.querySelectorAll('.categoria-ativo');
 
-        categoriaAtiva.forEach(elemento => {
-            elemento.classList.remove('categoria-ativo');
-            elemento.nextElementSibling.style.display = 'none'
-        });
+    //     categoriaAtiva.forEach(elemento => {
+    //         elemento.classList.remove('categoria-ativo');
+    //         elemento.nextElementSibling.style.display = 'none'
+    //     });
         
-        if (contemClass) {
-            divContainerButton.style.display = 'none';
-            divCategoria.classList.remove('categoria-ativo');
-        } else {
-            divCategoria.classList.add('categoria-ativo');
-            divContainerButton.style.display = '';
-        }
-        //debugger
-        // const contemClass = divCategoria.classList.contains('categoria-ativo');
-        // const categoriaAtiva = document.querySelectorAll('.categoria-ativo');
+    //     if (contemClass) {
+    //         divContainerButton.style.display = 'none';
+    //         divCategoria.classList.remove('categoria-ativo');
+    //     } else {
+    //         divCategoria.classList.add('categoria-ativo');
+    //         divContainerButton.style.display = '';
+    //     }
+    //     //debugger
+    //     // const contemClass = divCategoria.classList.contains('categoria-ativo');
+    //     // const categoriaAtiva = document.querySelectorAll('.categoria-ativo');
 
-        // categoriaAtiva.forEach(elemento => {
-        //     elemento.classList.remove('categoria-ativo');
-        // });
+    //     // categoriaAtiva.forEach(elemento => {
+    //     //     elemento.classList.remove('categoria-ativo');
+    //     // });
         
-        // if (contemClass) {
-        //     //debugger
-        //     divContainerButton.style.display = 'none';
-        //     return
-        // }
+    //     // if (contemClass) {
+    //     //     //debugger
+    //     //     divContainerButton.style.display = 'none';
+    //     //     return
+    //     // }
 
-        // divCategoria.classList.add('categoria-ativo');
+    //     // divCategoria.classList.add('categoria-ativo');
 
-        // divContainerButton.style.display = '';
-    } 
+    //     // divContainerButton.style.display = '';
+    // } 
 
-    const btnExcluirCategoria = divContainerButton.querySelector('#btnExcluirCategoria');
-    btnExcluirCategoria.onclick = () => {
-        divAreaCategorias.remove();
-    };
+    // const btnExcluirCategoria = divContainerButton.querySelector('#btnExcluirCategoria');
+
+    // btnExcluirCategoria.onclick = () => {
+    //     //divAreaCategorias.remove();
+    // };
+
+    //return divAreaCategorias;
+
+
+    let divAreaCategorias = document.createElement('div');
+    divAreaCategorias.classList.add('area-conteudo__categoria');
+
+    divAreaCategorias.innerHTML = htmlCategoria;
 
     return divAreaCategorias;
+
 };
 
-categorias.forEach(categoria => {
-    const categoriaGerada = exibiCategorias(categoria);
-    areaConteudoCategoria.append(categoriaGerada);
+categorias.forEach((categoria, index) => {
+    // const categoriaGerada = exibiCategorias(categoria, index);
+    // console.log(categoriaGerada)
+    // areaConteudoCategoria.append(categoriaGerada);
+
+    areaConteudoCategoria.append(exibiCategorias(categoria, index));
 });
+
+function eventoContainerCategoria(elemento) {
+    //alert("lancamento selecionado")
+    let btnCategoriaControles = elemento.parentElement.getElementsByClassName('categoria-editar__excluir')[0];
+
+    const categoriaSelecionada = elemento.classList.contains('categoria-ativo');
+    const categoriaAtiva = document.querySelectorAll('.categoria-ativo');
+
+    if(categoriaSelecionada){
+        elemento.classList.remove('categoria-ativo');
+        btnCategoriaControles.style.display = 'none';
+
+    } else {
+        if (categoriaAtiva.length) {
+            categoriaAtiva.forEach(function(item){
+                item.classList.remove('categoria-ativo')
+                 item.parentElement.getElementsByClassName('categoria-editar__excluir')[0].style.display = 'none';
+            });
+
+            elemento.classList.add('categoria-ativo');
+            btnCategoriaControles.style.display = '';
+
+        } else {
+            elemento.classList.add('categoria-ativo');
+            btnCategoriaControles.style.display = '';
+        };    
+    };
+};
+
+function eventoExcluirCategoria() {
+    const categoriaSelecionada = '.categoria-ativo';
+
+    document.querySelectorAll(categoriaSelecionada).forEach(excluirCategoria => {
+        let btnCategoriaControles = excluirCategoria.parentElement.getElementsByClassName('categoria-editar__excluir')[0];
+        
+        let indexCategoria = excluirCategoria.getAttribute('data-index');
+
+        const confirmaRemocao = confirm('Deseja excluir essa categoria ?');
+
+        if (confirmaRemocao) {            
+            //delete categorias[indexCategoria];
+    
+            //salvarCategoria();
+            excluirCategoria.remove();
+            btnCategoriaControles.style.display = 'none';
+        };
+    });
+};
+
+function eventoEditarCategoria() {
+    const categoriaAtualizada = prompt('Qual é o nova Categoria ?');
+
+    if (categoriaAtualizada) {
+        categoria.categoria = categoriaAtualizada
+    } else {
+        
+    }
+}
+
+
+// botao.onclick = () => {
+//     //debugger;
+//     const novaDescricao = prompt("Qual é o novo nome da terefa?");
+//     //console.log('nova descrição da tarefa:', novaDescricao);
+
+//     if(novaDescricao){            
+//         paragrafo.textContent = novaDescricao;
+//         tarefa.descricao = novaDescricao;
+//         atualizarTarefa();
+//         alert("Tarefa atuaizada com sucesso!");
+//     } else {
+//         alert("Atualização cancela ou valor inválida!");
+//     };
+// };
