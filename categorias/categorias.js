@@ -27,7 +27,6 @@ const areaConteudoCategoria = document.querySelector('.area-conteudo');
 // };
 
 function exibiCategoria(categoria, index) {
-    console.log(categoria)
     let opacity = 80; // hex
 
     let htmlCategoria = `

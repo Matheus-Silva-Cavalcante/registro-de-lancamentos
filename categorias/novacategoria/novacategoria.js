@@ -1,6 +1,7 @@
 const btnSalvarNovaCategoria = document.querySelector('.btn-salvar-categoria');
 
 btnSalvarNovaCategoria?.addEventListener('click', () => {
+    //debugger
     const categoria = {
         categoria:  textoCategoria.value,
         cor: corCategoria.value,
@@ -53,6 +54,7 @@ function definirCor(background){
 };
 
 document.addEventListener('DOMContentLoaded', function () {
+    //debugger
     const indexCategoria = localStorage.getItem('categoriaEditarIndex');
     
     if (indexCategoria !== null) {
@@ -62,3 +64,12 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelector('#corCategoria').value = categoria.cor;
     }
 });
+
+function btnCancelarAcaoNovaCategoria() {
+    const indexCategoria = localStorage.getItem('categoriaEditarIndex');
+    location.href = "/categorias/categorias.html"
+
+    if (indexCategoria) {
+        localStorage.removeItem('categoriaEditarIndex');
+    }
+}

@@ -67,7 +67,9 @@ lancamentos.forEach((lancamento, index) => {
 });
 
 function buscarLancamento(buscarLacamento) {
+    //debugger
     document.querySelectorAll('.divlancamento').forEach(elemento => {
+        //debugger
         const lancamento = elemento.innerHTML.toLowerCase();
 
         if (lancamento.indexOf(buscarLacamento.toLowerCase()) > -1) {
