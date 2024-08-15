@@ -208,7 +208,6 @@ function eventoExcluirCategoria() {
 
 function eventoEditarCategoria() {
     const categoriaAtiva = document.querySelector('.categoria-ativo');
-    console.log(categoriaAtiva)
     
     if (categoriaAtiva) {
         const indexCategoria = categoriaAtiva.getAttribute('data-index');

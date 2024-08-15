@@ -1,7 +1,6 @@
 const btnSalvarNovaCategoria = document.querySelector('.btn-salvar-categoria');
 
 btnSalvarNovaCategoria?.addEventListener('click', () => {
-    debugger
     const categoria = {
         categoria:  textoCategoria.value,
         cor: corCategoria.value,
@@ -54,7 +53,6 @@ function definirCor(background){
 };
 
 document.addEventListener('DOMContentLoaded', function () {
-    //debugger
     const indexCategoria = localStorage.getItem('categoriaEditarIndex');
     
     if (indexCategoria !== null) {

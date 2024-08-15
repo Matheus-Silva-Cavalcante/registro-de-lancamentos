@@ -1,7 +1,6 @@
 const btnSalvarLancamento = document.querySelector('.btn-salvar-lancamento');
 
 btnSalvarLancamento?.addEventListener('click', () => {
-    debugger
     let categoriaNovoLacamento = categorias[categoriaLancamento.value]; 
 
     const lancamento = {
@@ -33,15 +32,6 @@ btnSalvarLancamento?.addEventListener('click', () => {
         valorLancamento.classList.remove('erro');
     };
 
-    // if (lancamento.categoria.length === 0) {
-    //     selectCategoriaVasia.style.display = '';
-    //     categoriaLancamento.classList.add('erro');
-    //     campoVazio = true;
-    // } else {
-    //     selectCategoriaVasia.style.display = 'none';
-    //     categoriaLancamento.classList.remove('erro');
-    // };
-
     if (lancamento.data.length === 0) {
         inputDataVasio.style.display = '';
         dataLancamento.classList.add('erro');
@@ -67,7 +57,6 @@ btnSalvarLancamento?.addEventListener('click', () => {
 });
 
 function exibiCategoriasCriada(categoria, index) {
-    console.log(categoria);
     let opacity = 80;
     const optionCategoria = document.createElement('option');
 

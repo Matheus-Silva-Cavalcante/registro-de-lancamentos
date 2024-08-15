@@ -1,7 +1,6 @@
 const sectionLacamentos = document.querySelector('#lancamentos');
 
 function montarLancamento(lancamento, index) {
-    console.log(lancamento)
     let opacity = 80;
 
     let htmlLancamento = `
@@ -68,9 +67,7 @@ lancamentos.forEach((lancamento, index) => {
 });
 
 function buscarLancamento(buscarLacamento) {
-    //debugger
     document.querySelectorAll('.divlancamento').forEach(elemento => {
-        //debugger
         const lancamento = elemento.innerHTML.toLowerCase();
 
         if (lancamento.indexOf(buscarLacamento.toLowerCase()) > -1) {
@@ -82,7 +79,6 @@ function buscarLancamento(buscarLacamento) {
 }
 
 btnBuscarLancamento.addEventListener('click', () => {
-    //alert()
     buscarLancamento(campoBusca.value);
 })
 
