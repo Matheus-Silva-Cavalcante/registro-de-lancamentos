@@ -1,9 +1,8 @@
 const btnSalvarLancamento = document.querySelector('.btn-salvar-lancamento');
 
-btnSalvarLancamento.addEventListener('click', () => {
-    let categoriaNovoLacamento = categorias[categoriaLancamento.value];    
-
-    console.log(categorias[categoriaLancamento.value] )
+btnSalvarLancamento?.addEventListener('click', () => {
+    debugger
+    let categoriaNovoLacamento = categorias[categoriaLancamento.value]; 
 
     const lancamento = {
         descricao: descricaoLancamento.value,
@@ -54,31 +53,51 @@ btnSalvarLancamento.addEventListener('click', () => {
 
     if (campoVazio) return;   
 
-    lancamentos.push(lancamento);
+    const indexLancamentoEditar = localStorage.getItem('lancamentoEditarIndex');
+
+    if (indexLancamentoEditar !== null) {
+        lancamentos[indexLancamentoEditar] = lancamento;
+        localStorage.removeItem('lancamentoEditarIndex');
+    } else {
+        lancamentos.push(lancamento);
+    }
+
     salvarLacamento();
     history.back();
 });
 
-console.log(categorias);
-
 function exibiCategoriasCriada(categoria, index) {
-    console.log(index);
+    console.log(categoria);
     let opacity = 80;
     const optionCategoria = document.createElement('option');
 
-    optionCategoria.style.background = (categoria.cor + opacity);
-    optionCategoria.style.color = categoria.corFonte;
+    optionCategoria.style.background = (categoria?.cor + opacity);
+    optionCategoria.style.color = categoria?.corFonte;
     optionCategoria.setAttribute('value', index);
 
     optionCategoria.innerHTML = `
-        ${categoria.categoria}
+        ${categoria?.categoria}
     `
 
     return optionCategoria;
 }
 
 categorias.forEach((categoria,index) => {
+    if (!categoria)  return  
+
     const mostrarCategoriLacamento = exibiCategoriasCriada(categoria, index);
     categoriaLancamento.append(mostrarCategoriLacamento);
-    console.log(categoria);
 });
+
+document.addEventListener('DOMContentLoaded', function (){
+    const indexLancamento = localStorage.getItem('lancamentoEditarIndex')
+    
+    if (indexLancamento !== null) {
+        const lancamento = lancamentos[indexLancamento]
+        
+        document.querySelector('#descricaoLancamento').value = lancamento.descricao
+        document.querySelector('#valorLancamento').value = lancamento.valor
+        document.querySelector('#tipoLancamento').value = lancamento.tipo
+        document.querySelector('#dataLancamento').value = lancamento.data
+    }
+})

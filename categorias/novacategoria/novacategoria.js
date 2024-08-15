@@ -1,14 +1,11 @@
 const btnSalvarNovaCategoria = document.querySelector('.btn-salvar-categoria');
 
 btnSalvarNovaCategoria?.addEventListener('click', () => {
-
-    //const novoId = categorias.length > 0 ? categorias[categorias.length - 1].id + 1 : 1;
-
+    debugger
     const categoria = {
-        //id: novoId,
         categoria:  textoCategoria.value,
         cor: corCategoria.value,
-        corFonte: definirCorFonte(corCategoria.value)
+        corFonte: definirCor(corCategoria.value)
     };
 
     let campoVazio = false
@@ -24,12 +21,20 @@ btnSalvarNovaCategoria?.addEventListener('click', () => {
 
     if(campoVazio) return;
 
-    categorias.push(categoria);
-    salvarCategoria();
+    const indexCategoriaEditar = localStorage.getItem('categoriaEditarIndex');
+
+    if (indexCategoriaEditar !== null) {
+        categorias[indexCategoriaEditar] = categoria;
+        localStorage.removeItem('categoriaEditarIndex');
+    } else {
+        categorias.push(categoria);
+    }
+
+    salvarCategoria();   
     history.back();    
 });
 
-function definirCorFonte(background){
+function definirCor(background){
     var hex = background;
     var r, g, b, lum;
 
@@ -47,3 +52,15 @@ function definirCorFonte(background){
         return '#ffffff'
     };
 };
+
+document.addEventListener('DOMContentLoaded', function () {
+    //debugger
+    const indexCategoria = localStorage.getItem('categoriaEditarIndex');
+    
+    if (indexCategoria !== null) {
+        const categoria = categorias[indexCategoria];
+
+        document.querySelector('#textoCategoria').value = categoria.categoria;
+        document.querySelector('#corCategoria').value = categoria.cor;
+    }
+});

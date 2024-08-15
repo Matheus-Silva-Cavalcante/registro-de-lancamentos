@@ -26,14 +26,13 @@ const areaConteudoCategoria = document.querySelector('.area-conteudo');
 //     return divCategorias;
 // };
 
-function exibiCategorias(categoria, index) {
-    //debugger
+function exibiCategoria(categoria, index) {
     console.log(categoria)
     let opacity = 80; // hex
 
     let htmlCategoria = `
     <div class="categoria" style="background-color: ${categoria.cor + opacity}; color: ${categoria.corFonte};" data-index="${index}" onclick="eventoContainerCategoria(this)">
-        ${categoria.categoria}
+        <span class="nome-categoria">${categoria.categoria}</span>
         
         <div class="categoria__color" style="background-color: ${categoria.cor};"></div>
     </div>
@@ -154,14 +153,13 @@ function exibiCategorias(categoria, index) {
 
 categorias.forEach((categoria, index) => {
     // const categoriaGerada = exibiCategorias(categoria, index);
-    // console.log(categoriaGerada)
     // areaConteudoCategoria.append(categoriaGerada);
+    if (!categoria) return
 
-    areaConteudoCategoria.append(exibiCategorias(categoria, index));
+    areaConteudoCategoria.prepend(exibiCategoria(categoria, index));
 });
 
 function eventoContainerCategoria(elemento) {
-    //alert("lancamento selecionado")
     let btnCategoriaControles = elemento.parentElement.getElementsByClassName('categoria-editar__excluir')[0];
 
     const categoriaSelecionada = elemento.classList.contains('categoria-ativo');
@@ -199,9 +197,9 @@ function eventoExcluirCategoria() {
         const confirmaRemocao = confirm('Deseja excluir essa categoria ?');
 
         if (confirmaRemocao) {            
-            //delete categorias[indexCategoria];
+            delete categorias[indexCategoria];
     
-            //salvarCategoria();
+            salvarCategoria();
             excluirCategoria.remove();
             btnCategoriaControles.style.display = 'none';
         };
@@ -209,27 +207,14 @@ function eventoExcluirCategoria() {
 };
 
 function eventoEditarCategoria() {
-    const categoriaAtualizada = prompt('Qual é o nova Categoria ?');
-
-    if (categoriaAtualizada) {
-        categoria.categoria = categoriaAtualizada
-    } else {
+    const categoriaAtiva = document.querySelector('.categoria-ativo');
+    console.log(categoriaAtiva)
+    
+    if (categoriaAtiva) {
+        const indexCategoria = categoriaAtiva.getAttribute('data-index');
         
+        localStorage.setItem('categoriaEditarIndex', indexCategoria);
+        
+        window.location.href = "/categorias/novacategoria/novacategoria.html";
     }
 }
-
-
-// botao.onclick = () => {
-//     //debugger;
-//     const novaDescricao = prompt("Qual é o novo nome da terefa?");
-//     //console.log('nova descrição da tarefa:', novaDescricao);
-
-//     if(novaDescricao){            
-//         paragrafo.textContent = novaDescricao;
-//         tarefa.descricao = novaDescricao;
-//         atualizarTarefa();
-//         alert("Tarefa atuaizada com sucesso!");
-//     } else {
-//         alert("Atualização cancela ou valor inválida!");
-//     };
-// };

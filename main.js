@@ -1,6 +1,7 @@
 const sectionLacamentos = document.querySelector('#lancamentos');
 
 function montarLancamento(lancamento, index) {
+    console.log(lancamento)
     let opacity = 80;
 
     let htmlLancamento = `
@@ -42,7 +43,7 @@ function montarLancamento(lancamento, index) {
         </div>
 
         <div id='divContainerButton' class="lancamento-conteudo__bnt" style="display: none;">
-            <button class="btn-opcao-lancamento btn-editar" data-index="${index}">
+            <button class="btn-opcao-lancamento btn-editar" onclick="eventoEditarLancamento()" data-index="${index}">
                 <div class="icon-editor"></div>
             </button>
 
@@ -60,10 +61,8 @@ function montarLancamento(lancamento, index) {
         return divLancamento;
 };
 
-
 lancamentos.forEach((lancamento, index) => {
     if(!lancamento) return
-    console.log(lancamento)
 
     sectionLacamentos.prepend(montarLancamento(lancamento, index));
 });
@@ -130,12 +129,26 @@ function eventoExcluirLancamento(elemento){
         let confirmaRemocao = confirm('Deseja excluir esse Laçamento ?')
 
         if (confirmaRemocao) {            
-            //delete lancamentos[indiceLancamento];
+            delete lancamentos[indiceLancamento];
     
-            //salvarLacamento();
+            salvarLacamento();
             excluirLancamento.remove();
             botoesControle.style.display = 'none';
         }
     });
 
 };
+
+function eventoEditarLancamento() {
+    const lancamentoAtivo = document.querySelector('.lancamento-ativo');
+    console.log(lancamentoAtivo);
+
+    if (lancamentoAtivo) {
+        const indexLancamento = lancamentoAtivo.getAttribute('data-index');
+        console.log(indexLancamento);
+
+        localStorage.setItem('lancamentoEditarIndex', indexLancamento);
+
+        window.location.href = "/novolancamento/novolancamento.html";
+    }
+}
