@@ -1,6 +1,6 @@
 const btnSalvarNovaCategoria = document.querySelector('.btn-salvar-categoria');
 
-btnSalvarNovaCategoria?.addEventListener('click', () => {
+function gerarCategoria() {
     //debugger
     const categoria = {
         categoria:  textoCategoria.value,
@@ -31,7 +31,17 @@ btnSalvarNovaCategoria?.addEventListener('click', () => {
     }
 
     salvarCategoria();   
-    history.back();    
+    history.back(); 
+}
+
+btnSalvarNovaCategoria?.addEventListener('click', () => {
+    gerarCategoria();
+});
+
+document.addEventListener('keypress', function(evento) {
+    if (evento.key === 'Enter') {
+        gerarCategoria();
+    };
 });
 
 function definirCor(background){

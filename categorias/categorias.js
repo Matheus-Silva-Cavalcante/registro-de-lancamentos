@@ -30,10 +30,10 @@ function exibiCategoria(categoria, index) {
     let opacity = 80; // hex
 
     let htmlCategoria = `
-    <div class="categoria" style="background-color: ${categoria.cor + opacity}; color: ${categoria.corFonte};" data-index="${index}" onclick="eventoContainerCategoria(this)">
-        <span class="nome-categoria">${categoria.categoria}</span>
+    <div class="categoria" style="background-color: ${categoria?.cor + opacity}; color: ${categoria?.corFonte};" data-index="${index}" onclick="eventoContainerCategoria(this)">
+        <span class="nome-categoria">${categoria?.categoria}</span>
         
-        <div class="categoria__color" style="background-color: ${categoria.cor};"></div>
+        <div class="categoria__color" style="background-color: ${categoria?.cor};"></div>
     </div>
 
     <div class="categoria-editar__excluir" style="display: none;">
@@ -45,7 +45,9 @@ function exibiCategoria(categoria, index) {
             <div class="icon-white"></div>
         </button>
     </div>
-    `
+    `;
+
+    
 
     // const divAreaCategorias = document.createElement('div');
     // divAreaCategorias.setAttribute('data-index', index)
@@ -140,7 +142,6 @@ function exibiCategoria(categoria, index) {
 
     //return divAreaCategorias;
 
-
     let divAreaCategorias = document.createElement('div');
     divAreaCategorias.classList.add('area-conteudo__categoria');
 
@@ -151,8 +152,6 @@ function exibiCategoria(categoria, index) {
 };
 
 categorias.forEach((categoria, index) => {
-    // const categoriaGerada = exibiCategorias(categoria, index);
-    // areaConteudoCategoria.append(categoriaGerada);
     if (!categoria) return
 
     areaConteudoCategoria.prepend(exibiCategoria(categoria, index));
@@ -189,6 +188,7 @@ function eventoExcluirCategoria() {
     const categoriaSelecionada = '.categoria-ativo';
     
     document.querySelectorAll(categoriaSelecionada).forEach(excluirCategoria => {
+        //debugger
         let btnCategoriaControles = excluirCategoria.parentElement.getElementsByClassName('categoria-editar__excluir')[0];
         
         let indexCategoria = excluirCategoria.getAttribute('data-index');

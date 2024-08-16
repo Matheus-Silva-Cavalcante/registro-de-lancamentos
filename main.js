@@ -3,6 +3,18 @@ const sectionLacamentos = document.querySelector('#lancamentos');
 function montarLancamento(lancamento, index) {
     let opacity = 80;
 
+    const categoria = categorias[lancamento.categoria]
+
+    const htmlCategoria = categoria ? `
+                <div id="lancamentoConteudoCategorias" class="lancamento-conteudo__categoria">
+                    <div class="lancamento-conteudo__categorias" 
+                        style="background-color: ${categoria?.cor + opacity}; color: ${categoria?.corFonte};"
+                        >
+                            ${categoria?.categoria || ''}
+                        <div class="lancamento-conteudo__categoria__color" style="background: ${categoria?.cor};"></div>
+                    </div>
+                </div>` : '';
+
     let htmlLancamento = `
         <div id="divContainerLancamento" class="lancamento" onclick="eventoContainerLancamento(this)" data-index="${index}">
             <div class="lancamento-conteudo">
@@ -30,14 +42,7 @@ function montarLancamento(lancamento, index) {
                     </div>                    
                 </div>
 
-                <div id="lancamentoConteudoCategorias" class="lancamento-conteudo__categoria">
-                    <div class="lancamento-conteudo__categorias" 
-                        style="background-color: ${lancamento.categoria.cor + opacity}; color: ${lancamento.categoria.corFonte};"
-                        >
-                            ${lancamento.categoria.categoria}
-                        <div class="lancamento-conteudo__categoria__color" style="background: ${lancamento.categoria.cor};"></div>
-                    </div>
-                </div>
+                ${htmlCategoria}
             </div>
         </div>
 
@@ -145,9 +150,11 @@ function eventoExcluirLancamento(elemento){
 
 function eventoEditarLancamento() {
     const lancamentoAtivo = document.querySelector('.lancamento-ativo');
+    console.log(lancamentoAtivo);
 
     if (lancamentoAtivo) {
         const indexLancamento = lancamentoAtivo.getAttribute('data-index');
+        console.log(indexLancamento);
 
         localStorage.setItem('lancamentoEditarIndex', indexLancamento);
 

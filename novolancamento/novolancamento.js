@@ -2,13 +2,13 @@ const btnSalvarLancamento = document.querySelector('.btn-salvar-lancamento');
 
 function gerarLacamento() {
     //debugger
-    let categoriaNovoLacamento = categorias[categoriaLancamento.value]; 
+    //let categoriaNovoLacamento = categorias[categoriaLancamento.value]; 
 
     const lancamento = {
         descricao: descricaoLancamento.value,
         valor: valorLancamento.value,
         tipo: tipoLancamento.value,
-        categoria: categoriaNovoLacamento,
+        categoria: categoriaLancamento.value,
         data: dataLancamento.value
     };
        
@@ -77,6 +77,7 @@ document.addEventListener('keypress', function(evento) {
 })
 
 function exibiCategoriasCriada(categoria, index) {
+    console.log(categoria);
     let opacity = 80;
     const optionCategoria = document.createElement('option');
 
@@ -103,6 +104,7 @@ document.addEventListener('DOMContentLoaded', function (){
     
     if (indexLancamento !== null) {
         const lancamento = lancamentos[indexLancamento]
+        console.log(lancamento)
         
         document.querySelector('#descricaoLancamento').value = lancamento.descricao
 
