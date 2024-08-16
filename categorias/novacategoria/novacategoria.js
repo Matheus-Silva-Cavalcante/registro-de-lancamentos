@@ -54,22 +54,22 @@ function definirCor(background){
 };
 
 document.addEventListener('DOMContentLoaded', function () {
-    //debugger
     const indexCategoria = localStorage.getItem('categoriaEditarIndex');
     
     if (indexCategoria !== null) {
         const categoria = categorias[indexCategoria];
 
         document.querySelector('#textoCategoria').value = categoria.categoria;
+
         document.querySelector('#corCategoria').value = categoria.cor;
     }
 });
 
 function btnCancelarAcaoNovaCategoria() {
     const indexCategoria = localStorage.getItem('categoriaEditarIndex');
-    location.href = "/categorias/categorias.html"
+    location.href = "/categorias/categorias.html";
 
     if (indexCategoria) {
         localStorage.removeItem('categoriaEditarIndex');
-    }
-}
+    };
+};

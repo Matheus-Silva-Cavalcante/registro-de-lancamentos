@@ -1,6 +1,6 @@
 const btnSalvarLancamento = document.querySelector('.btn-salvar-lancamento');
 
-btnSalvarLancamento?.addEventListener('click', () => {
+function gerarLacamento() {
     //debugger
     let categoriaNovoLacamento = categorias[categoriaLancamento.value]; 
 
@@ -64,10 +64,19 @@ btnSalvarLancamento?.addEventListener('click', () => {
 
     salvarLacamento();
     history.back();
+}
+
+btnSalvarLancamento.addEventListener('click', () => {
+    gerarLacamento()
 });
 
+document.addEventListener('keypress', function(evento) {
+    if (evento.key === 'Enter') {
+        gerarLacamento()     
+    }
+})
+
 function exibiCategoriasCriada(categoria, index) {
-    console.log(categoria);
     let opacity = 80;
     const optionCategoria = document.createElement('option');
 
@@ -94,7 +103,6 @@ document.addEventListener('DOMContentLoaded', function (){
     
     if (indexLancamento !== null) {
         const lancamento = lancamentos[indexLancamento]
-        console.log(lancamento)
         
         document.querySelector('#descricaoLancamento').value = lancamento.descricao
 

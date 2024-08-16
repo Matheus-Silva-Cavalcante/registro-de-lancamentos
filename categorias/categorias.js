@@ -187,7 +187,7 @@ function eventoContainerCategoria(elemento) {
 
 function eventoExcluirCategoria() {
     const categoriaSelecionada = '.categoria-ativo';
-
+    
     document.querySelectorAll(categoriaSelecionada).forEach(excluirCategoria => {
         let btnCategoriaControles = excluirCategoria.parentElement.getElementsByClassName('categoria-editar__excluir')[0];
         
@@ -199,6 +199,7 @@ function eventoExcluirCategoria() {
             delete categorias[indexCategoria];
     
             salvarCategoria();
+
             excluirCategoria.remove();
             btnCategoriaControles.style.display = 'none';
         };
@@ -213,6 +214,6 @@ function eventoEditarCategoria() {
         
         localStorage.setItem('categoriaEditarIndex', indexCategoria);
         
-        window.location.href = "/categorias/novacategoria/novacategoria.html";
+        location.href = "/categorias/novacategoria/novacategoria.html";
     }
 }

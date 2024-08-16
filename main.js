@@ -61,7 +61,7 @@ function montarLancamento(lancamento, index) {
 };
 
 lancamentos.forEach((lancamento, index) => {
-    if(!lancamento) return
+    if(!lancamento) return;
 
     sectionLacamentos.prepend(montarLancamento(lancamento, index));
 });
@@ -76,13 +76,19 @@ function buscarLancamento(buscarLacamento) {
             elemento.style.display = '';
         } else {
             elemento.style.display = 'none';
-        }
-    })
-}
+        };
+    });
+};
 
 btnBuscarLancamento.addEventListener('click', () => {
     buscarLancamento(campoBusca.value);
-})
+});
+
+document.addEventListener('keypress', function(event) {
+    if (event.key === 'Enter') {
+        buscarLancamento(campoBusca.value);
+    };
+});
 
 function eventoContainerLancamento(element){     
     let botoesControle = element.parentElement.getElementsByClassName('lancamento-conteudo__bnt')[0];
@@ -139,11 +145,9 @@ function eventoExcluirLancamento(elemento){
 
 function eventoEditarLancamento() {
     const lancamentoAtivo = document.querySelector('.lancamento-ativo');
-    console.log(lancamentoAtivo);
 
     if (lancamentoAtivo) {
         const indexLancamento = lancamentoAtivo.getAttribute('data-index');
-        console.log(indexLancamento);
 
         localStorage.setItem('lancamentoEditarIndex', indexLancamento);
 
