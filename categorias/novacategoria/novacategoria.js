@@ -38,6 +38,8 @@ btnSalvarNovaCategoria?.addEventListener('click', () => {
     gerarCategoria();
 });
 
+gerarCategoria()
+
 document.addEventListener('keypress', function(evento) {
     if (evento.key === 'Enter') {
         gerarCategoria();
