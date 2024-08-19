@@ -5,7 +5,7 @@ function gerarCategoria() {
     const categoria = {
         categoria:  textoCategoria.value,
         cor: corCategoria.value,
-        corFonte: definirCor(corCategoria.value)
+        corFonte: definirCor(corCategoria.value),
     };
 
     let campoVazio = false
@@ -37,8 +37,6 @@ function gerarCategoria() {
 btnSalvarNovaCategoria?.addEventListener('click', () => {
     gerarCategoria();
 });
-
-gerarCategoria()
 
 document.addEventListener('keypress', function(evento) {
     if (evento.key === 'Enter') {
