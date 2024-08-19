@@ -10,8 +10,7 @@ function gerarLacamento() {
         tipo: tipoLancamento.value,
         categoria: categoriaLancamento.value,
         data: dataLancamento.value
-    };
-       
+    };       
     
     let campoVazio = false;
 
@@ -64,7 +63,7 @@ function gerarLacamento() {
 
     salvarLacamento();
     history.back();
-}
+};
 
 btnSalvarLancamento.addEventListener('click', () => {
     gerarLacamento()
@@ -74,10 +73,9 @@ document.addEventListener('keypress', function(evento) {
     if (evento.key === 'Enter') {
         gerarLacamento()     
     }
-})
+});
 
 function exibiCategoriasCriada(categoria, index) {
-    console.log(categoria);
     let opacity = 80;
     const optionCategoria = document.createElement('option');
 
@@ -90,7 +88,7 @@ function exibiCategoriasCriada(categoria, index) {
     `
 
     return optionCategoria;
-}
+};
 
 categorias.forEach((categoria,index) => {
     if (!categoria)  return  
@@ -103,18 +101,21 @@ document.addEventListener('DOMContentLoaded', function (){
     const indexLancamento = localStorage.getItem('lancamentoEditarIndex')
     
     if (indexLancamento !== null) {
-        const lancamento = lancamentos[indexLancamento]
-        console.log(lancamento)
+        const lancamento = lancamentos[indexLancamento];
         
-        document.querySelector('#descricaoLancamento').value = lancamento.descricao
+        document.querySelector('#descricaoLancamento').value = lancamento.descricao;
 
-        document.querySelector('#valorLancamento').value = lancamento.valor
+        document.querySelector('#valorLancamento').value = lancamento.valor;
 
-        document.querySelector('#tipoLancamento').value = lancamento.tipo
+        document.querySelector('#tipoLancamento').value = lancamento.tipo;
 
-        document.querySelector('#dataLancamento').value = lancamento.data
+        document.querySelector('#categoriaLancamento').value = lancamento.categoria;
+
+        document.querySelector('#dataLancamento').value = lancamento.data;
+    } else {
+        document.querySelector('#dataLancamento').value = dataYYYYMMDD(new Date());
     }
-})
+});
 
 function btnCancelarAcaoNovoLancamento() {
     const indexLancamento = localStorage.getItem('lancamentoEditarIndex');
@@ -122,5 +123,17 @@ function btnCancelarAcaoNovoLancamento() {
 
     if (indexLancamento) {
         localStorage.removeItem('lancamentoEditarIndex');
-    }
-}
+    };
+};
+
+/**
+ * 
+ * @param {Date} dataObj 
+ */
+function dataYYYYMMDD(dataObj) {
+    const offset = dataObj.getTimezoneOffset() * 60 * 1000; 
+    const time = dataObj.getTime();
+    const novaData = new Date(time - offset);
+    
+    return novaData.toJSON().split('T')[0];
+};

@@ -31,7 +31,7 @@ function montarLancamento(lancamento, index) {
                         </div>
 
                         <div class="lancamento-conteudo__data">
-                            ${lancamento.data}
+                            ${formatarData(lancamento.data)}                            
                         </div>
                     </div>
 
@@ -120,7 +120,7 @@ function eventoContainerLancamento(element){
             botoesControle.style.display = '';
         };    
     };
-}
+};
 
 function eventoExcluirLancamento(elemento){
     //console.log(elemento.getAttribute('data-index'));
@@ -146,6 +146,7 @@ function eventoExcluirLancamento(elemento){
         }
     });
 
+    exibirSaldo()
 };
 
 function eventoEditarLancamento() {
@@ -160,4 +161,36 @@ function eventoEditarLancamento() {
 
         window.location.href = "/novolancamento/novolancamento.html";
     }
+};
+
+function formatarData(data) {
+    const objData = new Date(data);
+    return objData.toLocaleDateString('pt-BR', {timeZone: 'UTC'});      
+};
+
+function calcularSaldo() {
+    let saldoTotal = 0;
+
+    lancamentos.forEach((lancamento) => {
+        if (lancamento) {
+            const valor = parseFloat(lancamento.valor);
+            console.log(valor);
+
+            if (lancamento.tipo === 'entrada') {
+                saldoTotal += valor;
+            } else if (lancamento.tipo === 'saida') {
+                saldoTotal -= valor;
+            };
+        };
+    });
+
+    return saldoTotal;
+};
+
+function exibirSaldo() {
+    const saldo = calcularSaldo();
+    const saldoElemento = document.querySelector('#valorTotal');
+    saldoElemento.textContent = `R$ ${saldo.toFixed(2)}`;
 }
+
+exibirSaldo();
