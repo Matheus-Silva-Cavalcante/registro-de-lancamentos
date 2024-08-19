@@ -62,11 +62,11 @@ function gerarLacamento() {
     }
 
     salvarLacamento();
-    history.back();
 };
 
 btnSalvarLancamento.addEventListener('click', () => {
-    gerarLacamento()
+    gerarLacamento();
+    location.href = "/index.html"
 });
 
 document.addEventListener('keypress', function(evento) {

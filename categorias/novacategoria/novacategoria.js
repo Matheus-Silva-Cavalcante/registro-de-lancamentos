@@ -30,12 +30,12 @@ function gerarCategoria() {
         categorias.push(categoria);
     }
 
-    salvarCategoria();   
-    history.back(); 
-}
+    salvarCategoria();
+};
 
 btnSalvarNovaCategoria?.addEventListener('click', () => {
     gerarCategoria();
+    location.href = "/categorias/categorias.html";
 });
 
 document.addEventListener('keypress', function(evento) {
