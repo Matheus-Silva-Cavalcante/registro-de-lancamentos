@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', function (){
 
 function btnCancelarAcaoNovoLancamento() {
     const indexLancamento = localStorage.getItem('lancamentoEditarIndex');
-    location.href = "/main.html"
+    location.href = "/index.html"
 
     if (indexLancamento) {
         localStorage.removeItem('lancamentoEditarIndex');
