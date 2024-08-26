@@ -31,11 +31,12 @@ function gerarCategoria() {
     }
 
     salvarCategoria();
+
+    location.href = "/categorias/categorias.html";
 };
 
 btnSalvarNovaCategoria?.addEventListener('click', () => {
     gerarCategoria();
-    location.href = "/categorias/categorias.html";
 });
 
 document.addEventListener('keypress', function(evento) {
