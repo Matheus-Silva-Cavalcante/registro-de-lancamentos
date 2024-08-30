@@ -45,9 +45,7 @@ function exibiCategoria(categoria, index) {
             <div class="icon-white"></div>
         </button>
     </div>
-    `;
-
-    
+    `;    
 
     // const divAreaCategorias = document.createElement('div');
     // divAreaCategorias.setAttribute('data-index', index)

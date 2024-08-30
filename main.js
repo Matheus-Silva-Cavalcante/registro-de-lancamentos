@@ -4,6 +4,7 @@ function montarLancamento(lancamento, index) {
     let opacity = 80;
 
     const categoria = categorias[lancamento.categoria]
+    console.log(categoria)
 
     const htmlCategoria = categoria ? `
                 <div id="lancamentoConteudoCategorias" class="lancamento-conteudo__categoria">

@@ -62,11 +62,12 @@ function gerarLacamento() {
     }
 
     salvarLacamento();
+
+    location.href = "/index.html";
 };
 
 btnSalvarLancamento.addEventListener('click', () => {
     gerarLacamento();
-    location.href = "/index.html"
 });
 
 document.addEventListener('keypress', function(evento) {
@@ -74,6 +75,8 @@ document.addEventListener('keypress', function(evento) {
         gerarLacamento()     
     }
 });
+
+//--------------------
 
 function exibiCategoriasCriada(categoria, index) {
     let opacity = 80;
@@ -96,6 +99,8 @@ categorias.forEach((categoria,index) => {
     const mostrarCategoriLacamento = exibiCategoriasCriada(categoria, index);
     categoriaLancamento.append(mostrarCategoriLacamento);
 });
+
+//---------------------------------
 
 document.addEventListener('DOMContentLoaded', function (){
     const indexLancamento = localStorage.getItem('lancamentoEditarIndex')
